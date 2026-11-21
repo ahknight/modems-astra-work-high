@@ -119,7 +119,8 @@
     "paragraphs": [
       "At 2,400 bit/s, each direction had its own slice of the voice band. V.32 put both transmitters on the same nominal 1,800 Hz carrier and raised the pace from 600 to 2,400 symbols a second. Now the receiver could hear a loud copy of its own transmission mixed with the quieter reply. It knew what it had sent. During training it learned how the circuit delayed and distorted that signal, so it could subtract a prediction of the echo.",
       "Listen for the two questions in the opening exchange. The caller holds one pitch. The answering modem returns a low and a high pitch together. Each can flip its wave halfway around and time the other modem’s response. The sharper, less musical training that follows gives the receivers a known pattern against which to adjust. An equalizer compensates for the way one symbol can smear into its neighbour.",
-      "The CCITT approved V.32 in 1984. Its 1988 edition specifies a 16-point mode for 9,600 interoperability and an optional 32-point trellis-coded alternative. Both deliver four information bits per symbol. In the coded version, the preceding choices restrict which point comes next. A receiver can weigh a whole succession of points when a single noisy one looks ambiguous. IBM researcher Gottfried Ungerboeck pioneered this combination of coding and modulation."
+      "The CCITT approved V.32 in 1984. Its 1988 edition specifies a 16-point mode for 9,600 interoperability and an optional 32-point trellis-coded alternative. Both deliver four information bits per symbol. In the coded version, the preceding choices restrict which point comes next. A receiver can weigh a whole succession of points when a single noisy one looks ambiguous. IBM researcher Gottfried Ungerboeck pioneered this combination of coding and modulation.",
+      "A bulletin-board operator had another option. The original U.S. Robotics Courier HST gave a file transfer 9,600 bit/s in one direction and left 300 bit/s for replies. The fast direction could switch when the traffic did. Two boxes marked “9600” could therefore be promising quite different conversations."
     ],
     "insight": {
       "title": "Which 9,600?",
@@ -145,6 +146,10 @@
       {
         "label": "IEEE Spectrum · Forney and the Codex modem",
         "url": "https://spectrum.ieee.org/david-forney-modem"
+      },
+      {
+        "label": "U.S. Robotics · Courier HST user manual (1986), chapter 1",
+        "url": "https://vtda.org/docs/computing/USRobotics/M610-0101-00_CourierHST_1986.pdf"
       }
     ]
   },
@@ -183,36 +188,8 @@
     "title": "Measuring the line",
     "dek": "Call the same number twice and the best settings might differ. V.34 takes the circuit’s measure before committing to them.",
     "paragraphs": [
-      "The CCITT’s earlier modems had a fixed symbol clock. In 1994 the ITU-T approved V.34, developed under the working name V.fast. It could change the clock, carrier and amount of high-frequency emphasis to suit the call. A better circuit could carry a broader signal. The required symbol rates were 2,400, 3,000 and 3,200 per second, with three additional choices optional.",
+      "V.32bis had a fixed symbol clock. In 1994 the ITU-T approved V.34, developed under the working name V.fast. It could change the clock, carrier and amount of high-frequency emphasis to suit the call. A better circuit could carry a broader signal. The required symbol rates were 2,400, 3,000 and 3,200 per second, with three additional choices optional.",
       "After the V.8 exchange identifies a mutually supported modem mode, V.34 sends a short chord of 21 pitches. Four positions in its evenly spaced pattern are deliberately empty. The receiver knows what went out, so it can measure which notes arrived weak and whether distortion spilled energy into the empty slots. The first burst, L1, is 6 dB louder than the following L2. Later, the modems train their equalizers and echo cancellers, then exchange the settings for data.",
-      "Getting twice the previous top rate took more than a wider signal. V.34 grouped symbols when coding and shaping them. Shell mapping favoured groups needing less average transmit power, leaving more room between distinguishable choices for a given power budget. Motorola’s Vedat Eyuboglu helped develop the standard. The Motorola engineers’ contemporary account connects the mathematics to measurements on actual telephone circuits."
-    ],
-    "insight": {
-      "title": "One clock, nine bits on average",
-      "text": "A 28,800 bit/s call at 3,200 symbols/s delivers nine information bits per symbol on average. Other valid clock and data-rate combinations need fractional averages. V.34 spreads the bits across groups of symbols to achieve them."
-    },
-    "sources": [
-      {
-        "label": "ITU · Original V.34 approval under working name V.fast",
-        "url": "https://www.itu.int/ITU-T/recommendations/rec.aspx?rec=2756"
-      },
-      {
-        "label": "ITU-T · Original V.34 (1994), §§5, 9–11 and probing table",
-        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.34-199409-S%21%21PDF-E&lang=s&type=items"
-      },
-      {
-        "label": "Forney, Brown, Eyuboglu & Moran · The V.34 High-Speed Modem Standard, IEEE (1996)",
-        "url": "https://device.report/m/b20d3eea0a5c149a573acdb50c3b4edfe935928d7936b1db4b72565df5882e3d.pdf"
-      }
-    ]
-  },
-  "33600": {
-    "title": "The last few thousand bits",
-    "dek": "The familiar probing chord returns. This time the reply can authorize a much larger alphabet.",
-    "paragraphs": [
-      "The ITU-T’s October 1996 revision kept the name V.34. Study Group 14 reported the new ceiling at the Geneva standardization conference. At Motorola, Les Brown represented the company on modem standards committees and Jack Moran surveyed real telephone paths to build more representative tests. The distinction mattered. A design that worked over one pristine connection still had to recognize what a poor one would bear.",
-      "The revised recommendation added two optional rates, 31,200 and 33,600 bit/s. Top rate needs the fastest V.34 clock, about 3,429 symbols/s. At that clock, the standard offers 512 points with minimum shaping for 28,800, and 1,408 for 33,600. Expanded shaping allows 640 and 1,664 respectively. More possible points in the same power budget leave smaller margins for noise. Both ends need the option and a sufficiently clean path.",
-      "The probe itself barely gives the upgrade away. In final training the modems send an MP message containing their supported rates and limits for each direction. One capability bit advertises 33,600. A lower rate can win, and asymmetry is possible when both sides enable it. The old opening sound can thereflers, then exchange the settings for data.",
       "Getting twice the previous top rate took more than a wider signal. V.34 grouped symbols when coding and shaping them. Shell mapping favoured groups needing less average transmit power, leaving more room between distinguishable choices for a given power budget. Motorola’s Vedat Eyuboglu helped develop the standard. The Motorola engineers’ contemporary account connects the mathematics to measurements on actual telephone circuits."
     ],
     "insight": {
@@ -327,4 +304,35 @@
     },
     {
       "title": "DSL · More room on the same pair",
-      "text": "The twisted pair into the house could carry frequencies that the switched voice service discarded. ADSL put a data transceiver at each end of that local pair, allowing voice and broadband to coexist. Discrete multitone modulation split the available spectrum into many narrow carriers. Training measured each one. Clean carriers took more bits; noisy ones took fewer. If interference changed, the mo
+      "text": "The twisted pair into the house could carry frequencies that the switched voice service discarded. ADSL put a data transceiver at each end of that local pair, allowing voice and broadband to coexist. Discrete multitone modulation split the available spectrum into many narrow carriers. Training measured each one. Clean carriers took more bits; noisy ones took fewer. If interference changed, the modems could move bits between carriers during the connection. John Cioffi and colleagues helped develop this approach, standardized internationally in G.992.1 in 1999.",
+      "sources": [
+        {
+          "label": "ITU-T · G.992.1, ADSL transceivers (1999)",
+          "url": "https://www.itu.int/itu-t/recommendations/rec.aspx?lang=en&rec=4718"
+        },
+        {
+          "label": "Stanford · Cioffi group and discrete multitone modulation",
+          "url": "https://cioffi-group.stanford.edu/mlc/group.html"
+        },
+        {
+          "label": "John Cioffi · The Essential Merit of Bit-Swapping",
+          "url": "https://web.stanford.edu/~cioffi/pdf/short.pdf"
+        }
+      ]
+    },
+    {
+      "title": "DOCSIS · A neighborhood shares the cable",
+      "text": "The first DOCSIS specification arrived in 1997 through the MCNS cable-operator consortium, CableLabs and industry partners. It let a cable modem and a headend from different vendors speak the same language over a shared cable plant. The neighborhood now had to share upstream airtime. Ranging helped bursts arrive at the headend on time and at a usable level. Later DOCSIS 3.1 spread downstream data across many tightly spaced carriers. The speaker had disappeared, but the modem was still measuring distortion and learning how to be heard.",
+      "sources": [
+        {
+          "label": "CableLabs · history, ranging and equalization, §§6.1–6.2 and Appendix II",
+          "url": "https://account.cablelabs.com/server/alfresco/c021877d-cce7-434a-b3ac-9cc466d6c601"
+        },
+        {
+          "label": "CableLabs · DOCSIS 3.1 physical layer, §7",
+          "url": "https://account.cablelabs.com/server/alfresco/64f9563d-fadc-408e-9991-501846cc84d8"
+        }
+      ]
+    }
+  ]
+}

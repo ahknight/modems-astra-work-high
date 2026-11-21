@@ -1,0 +1,319 @@
+{
+  "300": {
+    "stages": [
+      {
+        "time": 0,
+        "title": "Answer mark",
+        "text": "The distant modem holds its high mark at 2,225 Hz. This excerpt starts at the first sound, after the telephone exchange has answered."
+      },
+      {
+        "time": 1.65,
+        "title": "Caller returns mark",
+        "text": "The caller adds a steady 1,270 Hz. Two pitches travel together, one in each direction. Both ends now have a carrier to detect."
+      },
+      {
+        "time": 2.1,
+        "title": "The terminal speaks",
+        "text": "The answering terminal sends “CARRIER ARCHIVE ONLINE” and a login prompt. Every zero pulls the high pitch down to 2,025 Hz. The caller still holds a steady mark."
+      },
+      {
+        "time": 3.6,
+        "title": "Reply from home",
+        "text": "The user sends “HELLO FROM HOME”. The lower voice now switches between 1,070 and 1,270 Hz. After the message both ends hold mark, ready for another character."
+      }
+    ],
+    "method": "Reconstruction of a Bell 103A2 channel establishment, starting with the answer mark. The caller is already in data mode. The nominal 150 ms carrier-detection interval and additional 1.5 s wait come from Bell’s interface sequence. Payloads and typing delays are illustrative. Both messages are encoded at 300 bit/s, with one start bit, eight data bits and one stop bit. This is an ideal electrical signal with no acoustic-cup or line distortion.",
+    "sources": [
+      {
+        "label": "Bell System Practices 591-014-100, Table A · tone assignments",
+        "url": "https://bitsavers.org/communications/westernElectric/modems/591-014-100_Data_Set_103A_Identification_and_Operation_Jan67.pdf"
+      },
+      {
+        "label": "Bell System 103A interface specification, §6.2 · channel establishment",
+        "url": "https://bitsavers.org/communications/westernElectric/modems/103A_Interface_Specification_Feb67.pdf"
+      }
+    ]
+  },
+  "1200": {
+    "stages": [
+      {
+        "time": 0,
+        "title": "Answer mark",
+        "text": "The answering modem sends repeated pairs of ones, each turning the carrier back by a quarter turn. This produces the steady high whistle that the caller recognizes."
+      },
+      {
+        "time": 0.6116666666666667,
+        "title": "Caller trains",
+        "text": "The low band fills with scrambled ones. Although the underlying bit is always one, the scrambler supplies changing bit pairs so the receiver can find the symbol clock."
+      },
+      {
+        "time": 0.8816666666666667,
+        "title": "Answer trains",
+        "text": "The high band changes from a whistle to a rough texture as the answering modem also sends scrambled ones. Both voices now make four possible phase steps."
+      },
+      {
+        "time": 1.6466666666666667,
+        "title": "Login prompt",
+        "text": "The high band now carries an actual framed message, “CARRIER ARCHIVE ONLINE” followed by “LOGIN: ”. User data sounds much like scrambled training. The wire has no special connected chime."
+      },
+      {
+        "time": 2.296666666666667,
+        "title": "Reply from home",
+        "text": "The caller sends “HELLO FROM HOME”. Both transmitters continue sending scrambled idle ones after the characters run out."
+      }
+    ],
+    "method": "Transmitter reconstruction of the V.22 constant-carrier startup, beginning at the answer mark. The international V.25 preamble is omitted, as permitted on some national connections. The model follows nominal timing, differential quadrant changes, the 14/17-bit-tap scrambler and 75% roll-off pulse shaping at 600 baud. The guard tone is disabled. It assumes a clean line, no propagation delay and successful detection. Real equalizers, carrier offsets, speaker response and national compromise filters are outside the model. The 8N1 terminal messages and typing pauses are illustrative.",
+    "sources": [
+      {
+        "label": "CCITT V.22 (1988), §§2, 5 and 6.3 · modulation and startup",
+        "url": "https://www.itu.int/rec/T-REC-V.22-198811-I/en"
+      }
+    ]
+  },
+  "2400": {
+    "stages": [
+      {
+        "time": 0,
+        "title": "Answer mark",
+        "text": "The answering modem sends repeated pairs of ones, each turning the carrier back by a quarter turn. This produces the steady high whistle that the caller recognizes."
+      },
+      {
+        "time": 0.6116666666666667,
+        "title": "Request 2,400",
+        "text": "The caller alternates two particular pairs of bits, 00 and 11, for a tenth of a second. This short signature says it can use the larger alphabet."
+      },
+      {
+        "time": 0.7116666666666667,
+        "title": "Answer accepts",
+        "text": "The answer modem returns the same signature in its own band. The caller has already switched to scrambled ones at 1,200 bit/s."
+      },
+      {
+        "time": 0.8116666666666666,
+        "title": "Train at 1,200",
+        "text": "Both ends send scrambled ones. Each listens to the partner’s known pattern and prepares to distinguish points closer together."
+      },
+      {
+        "time": 1.3116666666666668,
+        "title": "Sixteen signal points",
+        "text": "The answer modem switches to four bits per symbol. The caller follows about one tenth of a second later. The clock still ticks 600 times a second."
+      },
+      {
+        "time": 1.5116666666666667,
+        "title": "Login prompt",
+        "text": "The high band now carries an actual framed message, “CARRIER ARCHIVE ONLINE” followed by “LOGIN: ”. User data sounds much like scrambled training. The wire has no special connected chime."
+      },
+      {
+        "time": 2.1616666666666666,
+        "title": "Reply from home",
+        "text": "The caller sends “HELLO FROM HOME”. Both transmitters continue sending scrambled idle ones after the characters run out."
+      }
+    ],
+    "method": "Transmitter reconstruction of the V.22bis constant-carrier startup, beginning at the answer mark. The international V.25 preamble is omitted, as permitted on some national connections. The model follows nominal timing, differential quadrant changes, the 14/17-bit-tap scrambler and 75% roll-off pulse shaping at 600 baud. The guard tone is disabled. It assumes a clean line, no propagation delay and successful detection. Real equalizers, carrier offsets, speaker response and national compromise filters are outside the model. The 8N1 terminal messages and typing pauses are illustrative.",
+    "sources": [
+      {
+        "label": "CCITT V.22bis (1988), §§2, 5 and 6.3 · modulation and startup",
+        "url": "https://www.itu.int/rec/T-REC-V.22bis-198811-I/en"
+      }
+    ]
+  },
+  "9600": {
+    "stages": [
+      {
+        "time": 0,
+        "title": "Answer tone",
+        "text": "The answering modem sends 2,100 Hz with half-turn phase reversals, a request to disable network echo cancellation."
+      },
+      {
+        "time": 1.02,
+        "title": "Caller on the line",
+        "text": "The caller adds a steady 1,800 Hz. Its tone will overlap the answering modem’s signals."
+      },
+      {
+        "time": 1.275,
+        "title": "Time the round trip",
+        "text": "The answerer sends 600 and 3,000 Hz together. The ends take turns reversing phase, timing the replies to estimate delay."
+      },
+      {
+        "time": 1.4416666666666664,
+        "title": "Train the receiver",
+        "text": "A regular S pattern and its brief reversal set the timing. The signal then opens into a reproducible stream of scrambled ones for echo and equalizer training."
+      },
+      {
+        "time": 2.888333333333333,
+        "title": "Advertise the rates",
+        "text": "The answering modem repeats a 16-bit R1 word offering 4,800 and 9,600 bit/s and trellis coding. This excerpt ends on its offer."
+      }
+    ],
+    "method": "Synthesized V.25 answer tone, round-trip exchange, 2,400-baud training and scrambled rate words. Example uses 10 ms one-way propagation, chosen training lengths and a finite root-raised-cosine filter. Levels are normalized and no telephone channel is simulated. Ends at the first rate offer R1. Later reciprocal training and user data are omitted.",
+    "sources": [
+      {
+        "label": "V.32, §§4–5, Tables 1 and 5–7",
+        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.32-198811-S%21%21PDF-E&lang=e&type=items"
+      },
+      {
+        "label": "V.25, answer tone and echo control",
+        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.25-199610-I%21%21PDF-E&lang=e&type=items"
+      }
+    ]
+  },
+  "14400": {
+    "stages": [
+      {
+        "time": 0,
+        "title": "Answer tone",
+        "text": "The answering modem sends 2,100 Hz with half-turn phase reversals, a request to disable network echo cancellation."
+      },
+      {
+        "time": 1.02,
+        "title": "Caller on the line",
+        "text": "The caller adds a steady 1,800 Hz. Its tone will overlap the answering modem’s signals."
+      },
+      {
+        "time": 1.275,
+        "title": "Time the round trip",
+        "text": "The answerer sends 600 and 3,000 Hz together. The ends take turns reversing phase, timing the replies to estimate delay."
+      },
+      {
+        "time": 1.4416666666666664,
+        "title": "Train the receiver",
+        "text": "A regular S pattern and its brief reversal set the timing. The signal then opens into a reproducible stream of scrambled ones for echo and equalizer training."
+      },
+      {
+        "time": 3.155,
+        "title": "Advertise the rates",
+        "text": "The answering modem repeats a 16-bit rate word offering all five V.32bis speeds, including 14,400."
+      },
+      {
+        "time": 3.1716666666666664,
+        "title": "Return the training",
+        "text": "The caller now supplies its own known sequence. Each direction uses a different scrambler so the two signals can be distinguished."
+      },
+      {
+        "time": 4.628333333333333,
+        "title": "Settle on 14,400",
+        "text": "While the caller repeats its rate offer, the answerer trains again and selects 14,400. Both transmit an end word. The short data-mode preamble that follows is outside this excerpt."
+      }
+    ],
+    "method": "Synthesized V.25 answer tone, round-trip exchange, 2,400-baud training and scrambled rate words. Example uses 10 ms one-way propagation, chosen training lengths and a finite root-raised-cosine filter. Levels are normalized and no telephone channel is simulated. Ends at the E words, before trellis-coded B1 and user data.",
+    "sources": [
+      {
+        "label": "V.32bis, §§4–6, Tables 2 and 4–6",
+        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.32bis-199102-I%21%21PDF-E&lang=e&type=items"
+      },
+      {
+        "label": "V.25, answer tone and echo control",
+        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.25-199610-I%21%21PDF-E&lang=e&type=items"
+      }
+    ]
+  },
+  "28800": {
+    "stages": [
+      {
+        "time": 0,
+        "title": "A pulsing answer",
+        "text": "At 2,100 Hz the answer tone swells and shrinks 15 times a second. This V.8 variant also reverses phase at 450 ms intervals."
+      },
+      {
+        "time": 1.16,
+        "title": "Find a common language",
+        "text": "The caller sends its menu in the low V.21 band. The answerer repeats their common modes in the high band. Three framed zero bytes close the exchange."
+      },
+      {
+        "time": 2.1350000000000002,
+        "title": "Exchange capabilities",
+        "text": "Each end sends a checked INFO0 message with its clock and carrier options. These brief words ride on different carriers."
+      },
+      {
+        "time": 2.3983333333333334,
+        "title": "Measure the downlink",
+        "text": "The answering modem plays a 21-note chord for 160 ms, then the same chord 6 dB quieter. The four empty frequencies help reveal distortion."
+      },
+      {
+        "time": 3.0983333333333336,
+        "title": "Measure the return path",
+        "text": "The calling modem sends the same two-level probe. The two ends can now compare estimates for each direction."
+      },
+      {
+        "time": 3.6983333333333337,
+        "title": "Choose the symbol clock",
+        "text": "The example reports a clean path. The receiver’s results lead to a 3,200-symbol/s clock and 1,920 Hz carrier in both directions."
+      },
+      {
+        "time": 4.07,
+        "title": "Align the receiver",
+        "text": "An alternating pair marks the start of training. Six turns through a known 48-symbol pattern give the receiver a reference. Scrambled ones follow it."
+      },
+      {
+        "time": 5.215,
+        "title": "Train the other direction",
+        "text": "The caller sends S, the periodic PP sequence and four-point training on the selected carrier. Both modems learn their own echo while the far receiver learns its equalizer."
+      },
+      {
+        "time": 6.359999999999999,
+        "title": "Fine-tune both ends",
+        "text": "The answering modem marks the move to final training. Both directions now train at once using separate scrambled sequences."
+      },
+      {
+        "time": 7.364999999999999,
+        "title": "Agree on a rate",
+        "text": "The MP messages specify a maximum of 28,800 in each direction. Their acknowledgments and end markers conclude this excerpt."
+      }
+    ],
+    "method": "Synthesized V.8 menus, V.34 INFO messages with CRC, phase-reversal ranging, L1/L2, S, PP, four-point TRN, J, MP acknowledgments and E. This fixed clean-line scenario selects symmetric rates, zero frequency offset and no vendor-specific training. Pulse shaping, levels, receiver timing and training lengths are illustrative. Stops before the trellis-coded B1 preamble and payload. No recording or added noise.",
+    "sources": [
+      {
+        "label": "V.8 (1994), Tables 1–4 and call procedures",
+        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.8-199409-S%21%21PDF-E&lang=e&type=items"
+      },
+      {
+        "label": "V.34 (1994), §§5, 7, 10–11 and Tables 14–20",
+        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.34-199409-S%21%21PDF-E&lang=e&type=items"
+      }
+    ]
+  },
+  "33600": {
+    "stages": [
+      {
+        "time": 0,
+        "title": "A pulsing answer",
+        "text": "At 2,100 Hz the answer tone swells and shrinks 15 times a second. This V.8 variant also reverses phase at 450 ms intervals."
+      },
+      {
+        "time": 1.16,
+        "title": "Find a common language",
+        "text": "The caller sends its menu in the low V.21 band. The answerer repeats their common modes in the high band. Three framed zero bytes close the exchange."
+      },
+      {
+        "time": 2.1350000000000002,
+        "title": "Exchange capabilities",
+        "text": "INFO0 identifies the optional fast clock and the larger signal alphabet needed at 33,600. A dedicated bit advertises the larger constellation."
+      },
+      {
+        "time": 2.3983333333333334,
+        "title": "Measure the downlink",
+        "text": "The answering modem plays a 21-note chord for 160 ms, then the same chord 6 dB quieter. The four empty frequencies help reveal distortion."
+      },
+      {
+        "time": 3.0983333333333336,
+        "title": "Measure the return path",
+        "text": "The calling modem sends the same two-level probe. The two ends can now compare estimates for each direction."
+      },
+      {
+        "time": 3.6983333333333337,
+        "title": "Choose the symbol clock",
+        "text": "The example reports a clean path. INFO1 selects about 3,429 symbols per second and a carrier near 1,959 Hz for both ends."
+      },
+      {
+        "time": 4.07,
+        "title": "Align the receiver",
+        "text": "An alternating pair marks the start of training. Six turns through a known 48-symbol pattern give the receiver a reference. Scrambled ones follow it."
+      },
+      {
+        "time": 5.138666666666667,
+        "title": "Train the other direction",
+        "text": "The caller sends S, the periodic PP sequence and four-point training on the selected carrier. Both modems learn their own echo while the far receiver learns its equalizer."
+      },
+      {
+        "time": 6.2073333333333345,
+        "title": "Fine-tune both ends",
+        "text": "The answering modem marks the move to
