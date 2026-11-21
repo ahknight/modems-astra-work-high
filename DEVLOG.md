@@ -27,3 +27,11 @@ Added a separate, explicitly labeled, silent teaching exercise to every chapter.
 Extended V.32 beyond the original R1 endpoint to reciprocal training, rate agreement, B1 and simultaneous uncoded 16-QAM data. With known clean-line clocks an independent matched-filter decoder recovered 195 consecutive ASCII bytes on each stem. V.32bis still ends before coded user data. The V.90 timing diagram in §9.2 was cross-checked for the analogue-then-digital probe order and Table 1 for the reconstructed μ-law levels.
 
 Published the initial main checkpoints through the GitHub connector and created gh-pages at the site commit. GitHub reported its Pages build and deployment successful. The public index returned the generated site. The connector supplies authenticated writes; local anonymous HTTPS git is used for independent reads.
+
+## 2026-11-20 · Browser and publication checks
+
+In an interactive Chrome session, inspected the cover and V.90 chapter at desktop size, played and paused the cover monitor, isolated the answer track, switched to spectrum, and sought to the PCM level test. Traversed all eight chapters, changed each silent experiment and verified automatic pauses at the next stage. The stage captions remained in the HTML throughout.
+
+Playwright WebKit 26.5 on Linux passed all eight chapters at 390 × 844 with reduced motion, including play/pause, both plot modes, keyboard seeking, restart, channel selection, teaching controls, stage stopping and natural replay. Firefox 153 passed the mobile layout, same controls for silent inspection and generated plots on all eight pages. Its headless AudioContext remained suspended at time zero after a trusted play click. Added an explicit recoverable output-start timeout. Shipping macOS Safari, physical modem interoperation and listening through a vintage speaker were not tested. The browser tests compare behavior and signal data rather than subjective acoustic likeness.
+
+Checked every local asset, link and fragment in the eleven static HTML pages. The public repository read-back caught incomplete or displaced chunks in four transferred blobs. The publication routine now reads full blocks and checks the returned Git object identity against the local object before updating a branch. Resized the two largest photos for the dimensions actually displayed.

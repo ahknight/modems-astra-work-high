@@ -88,11 +88,20 @@ function instrument(panel) {
     if(starting) return;
     if(active){halt();return;}
     starting=true;
+    let audioTimer;
     try {
       const AudioEngine=window.AudioContext||window.webkitAudioContext;
       if(!AudioEngine) throw new Error('Web Audio is unavailable');
       if(!context) context=new AudioEngine();
-      await context.resume();
+      // A browser with no available output can leave resume() pending.
+      // A late resume only opens the context. A new user gesture still has
+      // to schedule the buffers after an unsuccessful attempt.
+      if(context.state!=='running') {
+        get('[data-status]').textContent='Opening the audio output.';
+        await Promise.race([context.resume(),new Promise((_,reject)=>{
+          audioTimer=setTimeout(()=>reject(new Error('Output did not start')),3500);
+        })]);
+      }
       if(!buffers){
         buffers={};
         for(const key of ['caller','answer']){
@@ -103,9 +112,9 @@ function instrument(panel) {
       get('[data-status]').textContent='Playing signal.';
       start(offsets);
     } catch {
-      get('[data-current]').textContent='Audio is unavailable in this browser.';
+      get('[data-current]').textContent='Audio output did not start. Check the browser’s sound settings and press play to retry.';
       get('[data-status]').textContent='Audio is unavailable. Read the listening transcript for the signal sequence.';
-    } finally {starting=false;}
+    } finally {clearTimeout(audioTimer);starting=false;}
   }
   function jump(t) {
     t=Math.max(0,Math.min(duration,t));

@@ -364,61 +364,6 @@
         "text": "After a short silence the answering modem sends 2,100 Hz. Its strength ripples 15 times per second. Phase reversals ask network echo cancellers to stand aside."
       },
       {
-        "ti33334,
-        "title": "Measure the downlink",
-        "text": "The answering modem plays a 21-note chord for 160 ms, then the same chord 6 dB quieter. The four empty frequencies help reveal distortion."
-      },
-      {
-        "time": 3.0983333333333336,
-        "title": "Measure the return path",
-        "text": "The calling modem sends the same two-level probe. The two ends can now compare estimates for each direction."
-      },
-      {
-        "time": 3.6983333333333337,
-        "title": "Choose the symbol clock",
-        "text": "The example reports a clean path. INFO1 selects about 3,429 symbols per second and a carrier near 1,959 Hz for both ends."
-      },
-      {
-        "time": 4.07,
-        "title": "Align the receiver",
-        "text": "An alternating pair marks the start of training. Six turns through a known 48-symbol pattern give the receiver a reference. Scrambled ones follow it."
-      },
-      {
-        "time": 5.138666666666667,
-        "title": "Train the other direction",
-        "text": "The caller sends S, the periodic PP sequence and four-point training on the selected carrier. Both modems learn their own echo while the far receiver learns its equalizer."
-      },
-      {
-        "time": 6.2073333333333345,
-        "title": "Fine-tune both ends",
-        "text": "The answering modem marks the move to final training. Both directions now train at once using separate scrambled sequences."
-      },
-      {
-        "time": 7.145333333333334,
-        "title": "Agree on a rate",
-        "text": "Both MP messages enable 33,600 and request it in both directions. Their acknowledgments and end markers conclude this excerpt."
-      }
-    ],
-    "method": "Synthesized V.8 menus, V.34 INFO messages with CRC, phase-reversal ranging, L1/L2, S, PP, four-point TRN, J, MP acknowledgments and E. This fixed clean-line scenario selects symmetric rates, zero frequency offset and no vendor-specific training. Pulse shaping, levels, receiver timing and training lengths are illustrative. Stops before the trellis-coded B1 preamble and payload. No recording or added noise.",
-    "sources": [
-      {
-        "label": "V.8 (1994), Tables 1–4 and call procedures",
-        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.8-199409-S%21%21PDF-E&lang=e&type=items"
-      },
-      {
-        "label": "V.34 (1996), §§5, 7, 10–11 and Tables 14–20",
-        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.34-199610-S%21%21PDF-E&lang=e&type=items"
-      }
-    ]
-  },
-  "56000": {
-    "stages": [
-      {
-        "time": 0,
-        "title": "Answer tone",
-        "text": "After a short silence the answering modem sends 2,100 Hz. Its strength ripples 15 times per second. Phase reversals ask network echo cancellers to stand aside."
-      },
-      {
         "time": 1.6,
         "title": "The menus agree",
         "text": "Listen to the low caller and higher reply. At 300 bit/s they advertise data service, V.34 fallback and complementary V.90 roles. Three framed zero bytes acknowledge the agreement."
