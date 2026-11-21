@@ -35,3 +35,9 @@ In an interactive Chrome session, inspected the cover and V.90 chapter at deskto
 Playwright WebKit 26.5 on Linux passed all eight chapters at 390 × 844 with reduced motion, including play/pause, both plot modes, keyboard seeking, restart, channel selection, teaching controls, stage stopping and natural replay. Firefox 153 passed the mobile layout, same controls for silent inspection and generated plots on all eight pages. Its headless AudioContext remained suspended at time zero after a trusted play click. Added an explicit recoverable output-start timeout. Shipping macOS Safari, physical modem interoperation and listening through a vintage speaker were not tested. The browser tests compare behavior and signal data rather than subjective acoustic likeness.
 
 Checked every local asset, link and fragment in the eleven static HTML pages. The public repository read-back caught incomplete or displaced chunks in four transferred blobs. The publication routine now reads full blocks and checks the returned Git object identity against the local object before updating a branch. Resized the two largest photos for the dimensions actually displayed.
+
+## 2026-11-20 · Release verified
+
+Compared the published Git tree with the reviewed working tree and verified identical tree IDs. Retrieved all 32 served HTML, CSS, JavaScript, image and metadata files from GitHub Pages and compared their SHA-256 digests to the reviewed files. All matched. Together those files total 378,736 bytes before HTTP compression. No prerecorded audio is shipped.
+
+Opened the public site in Chrome, navigated to the V.90 chapter, sought to the connected payload, and verified that the playhead reached the end and the control changed to Replay. Confirmed Firefox's suspended-output error message and continued silent transcript navigation after that condition. GitHub reported the release deployment successful.
