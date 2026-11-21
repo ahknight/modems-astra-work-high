@@ -1,3 +1,4 @@
+import './bench.js';
 import {makeSignal} from './signals.js';
 import {drawScope,drawCallMap} from './plot.js';
 
@@ -14,7 +15,7 @@ function instrument(panel) {
   const selected={caller:true,answer:true};
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   let context, offsets=0, startedAt=0, active=false, starting=false, frame=0, stageIndex=-1;
-  let buffers, nodes=[], gains={}, view='wave', lastDraw=-1;
+  let buffers, nodes=[], gains={}, view='wave', lastDraw=-1, playEnd=duration;
   const now=()=>active?Math.min(duration,Math.max(0,context.currentTime-startedAt)):offsets;
 
   function paint(force=false) {
@@ -62,18 +63,24 @@ function instrument(panel) {
   }
   function tick() {
     if(!active) return;
-    if(now()>=duration) {halt(duration);get('[data-status]').textContent='End of signal.';return;}
+    if(now()>=playEnd) {
+      halt(playEnd);
+      get('[data-status]').textContent=playEnd===duration?'End of signal.':'Paused at the next stage. Press play to continue.';
+      return;
+    }
     paint();frame=requestAnimationFrame(tick);
   }
   function start(at) {
     stopSources(); cancelAnimationFrame(frame);
     offsets=at>=duration?0:at;
+    playEnd=get('[data-step]')?.checked
+      ? (signal.stages.find(s=>s.time>offsets+.00001)?.time ?? duration) : duration;
     const startTime=context.currentTime+.012;
     for(const key of ['caller','answer']) {
       const n=context.createBufferSource(), g=context.createGain();
       n.buffer=buffers[key];g.gain.value=selected[key] ? 0.63 : 0;
       n.connect(g);g.connect(context.destination);
-      n.start(startTime,offsets); nodes.push(n);gains[key]=g;
+      n.start(startTime,offsets,playEnd-offsets); nodes.push(n);gains[key]=g;
     }
     startedAt=startTime-offsets;active=true;transportState();paint(true);tick();
   }
@@ -120,6 +127,7 @@ function instrument(panel) {
       e.preventDefault();jump(now()+(['ArrowLeft','ArrowDown'].includes(e.key)?-1:1)*(e.shiftKey?1:.1));
     }
   });
+  get('[data-step]')?.addEventListener('change',()=>{if(active) start(now());});
   play.addEventListener('click',playFromGesture);
   get('[data-restart]').addEventListener('click',()=>jump(0));
   panel.querySelectorAll('[data-stage]').forEach(b=>b.addEventListener('click',()=>jump(signal.stages[Number(b.dataset.stage)].time)));

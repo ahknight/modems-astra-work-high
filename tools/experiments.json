@@ -1,0 +1,10 @@
+{
+  "300": {"title":"Read one character off the wire","label":"Character","choices":["H","I","A","?"]},
+  "1200":{"title":"Turn a pair of bits into a phase step","label":"Incoming bit pair","choices":["00","01","10","11"]},
+  "2400":{"title":"Place a symbol in its quadrant","label":"Incoming four bits","choices":["0000","0001","0010","0011","0100","0101","0110","0111","1000","1001","1010","1011","1100","1101","1110","1111"]},
+  "9600":{"title":"Subtract the sound of your own voice","label":"Echo estimate","choices":["No cancellation","Half the echo","Matching estimate","Too much subtraction"]},
+  "14400":{"title":"See what one noisy decision costs","label":"Line disturbance","choices":["Clean line","Small disturbance","Large disturbance"]},
+  "28800":{"title":"Find the missing notes","label":"Model line","choices":["Clean path","High notes attenuated","Overloaded amplifier"]},
+  "33600":{"title":"Read the final rate agreement","label":"Peer and line","choices":["Both support 33,600","Peer limited to 28,800","Line estimate limits rate"]},
+  "56000":{"title":"Step through the exchange’s codebook","label":"Positive μ-law magnitude","choices":["Ucode 16","Ucode 32","Ucode 48","Ucode 64","Ucode 80","Ucode 96"]}
+}

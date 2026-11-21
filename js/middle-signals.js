@@ -66,10 +66,16 @@ function pulseTable(beta) {
   tables.set(beta,bank);
   return bank;
 }
-function modulate(stem,start,angles,baud,carrier,level=unit,beta=0.2) {
+function modulate(stem,start,angles,baud,carrier,level=unit,beta=0.2,magnitudes=null) {
   const bank = pulseTable(beta);
   const real = Float32Array.from(angles, Math.cos);
   const imaginary = Float32Array.from(angles, Math.sin);
+  if (magnitudes) {
+    for (let k = 0; k < magnitudes.length; k++) {
+      real[k] *= magnitudes[k];
+      imaginary[k] *= magnitudes[k];
+    }
+  }
   render(stem,start,angles.length/baud,(t,n) => {
     const position = n * baud / SR;
     const phase = Math.round(position * 120);
@@ -96,7 +102,31 @@ function scrambler(side) {
 }
 const alternating = (count,a,b) => Array.from({length:count},(_,i) => i%2 ? b : a);
 
-function v32Burst(s,side,start,sCount,trnCount,words) {
+// V.32 (1988) §2.4.1.1, Tables 1 and 3. In reference quadrant 00,
+// the last two bits select one of four points. The first two bits control
+// relative quadrant movement using the same rule as the rate words.
+function v32UncodedSymbols(scramble,quadrant,b1Count,payloadCount,message) {
+  const angles = [], magnitudes = [];
+  const trainingAngle = Math.atan2(-1,-3);
+  const steps = [1,0,2,3];
+  let bitNumber = 0;
+  function nextDataBit() {
+    const octet = message.charCodeAt(Math.floor(bitNumber/8) % message.length);
+    const bit = (octet >>> (bitNumber % 8)) & 1;
+    bitNumber++;
+    return bit;
+  }
+  for (let symbol = 0; symbol < b1Count+payloadCount; symbol++) {
+    const bits = Array.from({length:4}, () => scramble(symbol < b1Count ? 1 : nextDataBit()));
+    quadrant = (quadrant + steps[2*bits[0]+bits[1]]) % 4;
+    const re = -1-2*bits[3], im = -1-2*bits[2];
+    angles.push(Math.atan2(im,re) + quadrant*quarter - trainingAngle);
+    magnitudes.push(Math.hypot(re,im)/Math.sqrt(10));
+  }
+  return {angles,magnitudes};
+}
+
+function v32Burst(s,side,start,sCount,trnCount,words,data) {
   const scramble = scrambler(side);
   const symbols = alternating(sCount,0,quarter).concat(alternating(16,2*quarter,3*quarter));
   let quadrant = 0;
@@ -112,7 +142,13 @@ function v32Burst(s,side,start,sCount,trnCount,words) {
       symbols.push(quarter * quadrant);
     }
   }
-  return modulate(s[side], start, symbols, 2400, 1800);
+  let magnitudes;
+  if (data) {
+    const block = v32UncodedSymbols(scramble,quadrant,data.b1Count,data.payloadCount,data.message);
+    magnitudes = Array(symbols.length).fill(1).concat(block.magnitudes);
+    symbols.push(...block.angles);
+  }
+  return modulate(s[side], start, symbols, 2400, 1800, unit, 0.2, magnitudes);
 }
 function v32(rate) {
   const bis = rate === 14400, s = session(), T = 1 / 2400;
@@ -131,33 +167,44 @@ function v32(rate) {
 
   const trn = bis ? 3840 : 3200;
   const r1 = training + (256+16+trn)*T;
-  // V.32 Table 6. Bits 5 and 6 offer 4800 and 9600, bit 8 offers trellis.
-  // V.32bis Table 5. Bits 5, 6, 9, 10 and 12 advertise every data rate.
+  // R1 advertises 4800, 9600 & trellis (V.32), or the five bis rates.
   const offer = bis ? '0000111111111001' : '0000011110010001';
-  const initialWords = Array(8).fill(offer);
-  v32Burst(s,'answer',training,256,trn,initialWords);
+  const candidate = bis ? offer : '0000011100010001'; // caller declines trellis
+  const selected = bis ? '0000100110011001' : '0000001100010001';
+  const eWord = '1111' + selected.slice(4);
+  v32Burst(s,'answer',training,256,trn,Array(8).fill(offer));
   mark(s,r1,'Advertise the rates',bis ?
     'The answering modem repeats a 16-bit rate word offering all five V.32bis speeds, including 14,400.' :
-    'The answering modem repeats a 16-bit R1 word offering 4,800 and 9,600 bit/s and trellis coding. This excerpt ends on its offer.');
-  let end = r1 + initialWords.length*8*T;
-  if (bis) {
-    const callerTraining = r1 + 5*8*T; // ≥ two received words plus transit
-    const measuredDelay = 64 + 2*24;
-    const callerTrn = 3072, answerFinalTrn = 2048;
-    const r2 = callerTraining + (measuredDelay+256+16+callerTrn)*T;
-    const finalTraining = r2 + 40*T;
-    const r3 = finalTraining + (256+16+answerFinalTrn)*T;
-    const eachR2 = Math.ceil(((r3-r2)/T + 40)/8);
-    const eWord = '1111100110011001';
-    const selected = '0000100110011001';
-    const cEnd = v32Burst(s,'caller',callerTraining,measuredDelay+256,callerTrn,[...Array(eachR2).fill(offer),eWord]);
-    const eachR3 = Math.ceil(((cEnd+transit-r3)/T)/8);
-    end = v32Burst(s,'answer',finalTraining,256,answerFinalTrn,[...Array(eachR3).fill(selected),eWord]);
-    mark(s,callerTraining,'Return the training','The caller now supplies its own known sequence. Each direction uses a different scrambler so the two signals can be distinguished.');
-    mark(s,finalTraining,'Settle on 14,400','While the caller repeats its rate offer, the answerer trains again and selects 14,400. Both transmit an end word. The short data-mode preamble that follows is outside this excerpt.');
+    'The answering modem repeats a 16-bit R1 word offering 4,800 and 9,600 bit/s and trellis coding.');
+  const callerTraining = r1 + 5*8*T; // two received words plus propagation
+  const measuredDelay = 64 + 2*24;
+  const callerTrn = 3072, answerFinalTrn = 2048;
+  const r2 = callerTraining + (measuredDelay+256+16+callerTrn)*T;
+  const finalTraining = r2 + 40*T;
+  const r3 = finalTraining + (256+16+answerFinalTrn)*T;
+  const eachR2 = Math.ceil(((r3-r2)/T + 40)/8);
+  const callerB1 = r2 + (eachR2+1)*8*T;
+  const eachR3 = Math.ceil(((callerB1+transit-r3)/T)/8);
+  const answerB1 = r3 + (eachR3+1)*8*T;
+  const answerData = answerB1 + 128*T;
+  const callerData = answerData + transit;
+  const payloadLength = 2400;
+  const greeting = 'Welcome to the signal archive!\r\n';
+  const command = 'LIST\r\n';
+  v32Burst(s,'caller',callerTraining,measuredDelay+256,callerTrn,[...Array(eachR2).fill(candidate),eWord],
+    bis ? null : {b1Count:Math.round((callerData-callerB1)/T),payloadCount:payloadLength,message:command});
+  const end = v32Burst(s,'answer',finalTraining,256,answerFinalTrn,[...Array(eachR3).fill(selected),eWord],
+    bis ? null : {b1Count:128,payloadCount:payloadLength+24,message:greeting});
+  mark(s,callerTraining,'Return the training','The caller supplies its own known sequence. Each direction uses a different scrambler so the two signals can be distinguished.');
+  mark(s,finalTraining,bis?'Settle on 14,400':'Choose the common mode',bis ?
+    'While the caller repeats its rate offer, the answerer trains again and selects 14,400. Both transmit an end word. The short data-mode preamble that follows is outside this excerpt.' :
+    'The caller offers the simpler 16-point mode. The answerer trains again, selects 9,600, and both ends mark agreement with an E word.');
+  if (!bis) {
+    mark(s,callerB1,'Enter data mode','The caller switches to four information bits per symbol and sends scrambled ones. The answerer follows. The receivers open their data outputs after the final preamble.');
+    mark(s,answerData,'Connected · 9,600 bit/s','The answerer now encodes the text “Welcome to the signal archive!” The caller sends “LIST”. Both messages repeat. The equal-looking fuzz now carries recoverable bytes in both directions.');
   }
-  s.method = 'Synthesized V.25 answer tone, round-trip exchange, 2,400-baud training and scrambled rate words. Example uses 10 ms one-way propagation, chosen training lengths and a finite root-raised-cosine filter. Levels are normalized and no telephone channel is simulated. ' + (bis ? 'Ends at the E words, before trellis-coded B1 and user data.' : 'Ends at the first rate offer R1. Later reciprocal training and user data are omitted.');
-  s.sources = [rec(bis?'V.32bis-199102-I':'V.32-198811-S',bis?'V.32bis, §§4–6, Tables 2 and 4–6':'V.32, §§4–5, Tables 1 and 5–7'),v25];
+  s.method = 'Synthesis begins at V.25 answer tone, after dialing and the initial off-hook silence. The caller answers after 1.02 s. V.25 permits early termination after detecting its response for 100 ms, so the 1.2 s tone is a permitted example. One-way delay is 10 ms. Training lengths and finite root-raised-cosine transmit filters are example choices. No channel or receiver is simulated. ' + (bis ? 'Ends at the E words, before trellis-coded B1 and user data.' : 'Includes reciprocal training, R1/R2/R3, E, scrambled B1 and synchronous 16-QAM data. The chosen payload repeats plain ASCII bytes least-significant bit first, with no link-layer framing.');
+  s.sources = [rec(bis?'V.32bis-199102-I':'V.32-198811-S',bis?'V.32bis, §§4–6, Tables 2 and 4–6':'V.32, §§2, 4–5, Tables 1, 3 and 5–7'),v25];
   return finish(s,end);
 }
 

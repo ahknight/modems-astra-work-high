@@ -141,13 +141,33 @@
       {
         "time": 2.888333333333333,
         "title": "Advertise the rates",
-        "text": "The answering modem repeats a 16-bit R1 word offering 4,800 and 9,600 bit/s and trellis coding. This excerpt ends on its offer."
+        "text": "The answering modem repeats a 16-bit R1 word offering 4,800 and 9,600 bit/s and trellis coding."
+      },
+      {
+        "time": 2.905,
+        "title": "Return the training",
+        "text": "The caller supplies its own known sequence. Each direction uses a different scrambler so the two signals can be distinguished."
+      },
+      {
+        "time": 4.361666666666666,
+        "title": "Choose the common mode",
+        "text": "The caller offers the simpler 16-point mode. The answerer trains again, selects 9,600, and both ends mark agreement with an E word."
+      },
+      {
+        "time": 5.348333333333333,
+        "title": "Enter data mode",
+        "text": "The caller switches to four information bits per symbol and sends scrambled ones. The answerer follows. The receivers open their data outputs after the final preamble."
+      },
+      {
+        "time": 5.415,
+        "title": "Connected · 9,600 bit/s",
+        "text": "The answerer now encodes the text “Welcome to the signal archive!” The caller sends “LIST”. Both messages repeat. The equal-looking fuzz now carries recoverable bytes in both directions."
       }
     ],
-    "method": "Synthesized V.25 answer tone, round-trip exchange, 2,400-baud training and scrambled rate words. Example uses 10 ms one-way propagation, chosen training lengths and a finite root-raised-cosine filter. Levels are normalized and no telephone channel is simulated. Ends at the first rate offer R1. Later reciprocal training and user data are omitted.",
+    "method": "Synthesis begins at V.25 answer tone, after dialing and the initial off-hook silence. The caller answers after 1.02 s. V.25 permits early termination after detecting its response for 100 ms, so the 1.2 s tone is a permitted example. One-way delay is 10 ms. Training lengths and finite root-raised-cosine transmit filters are example choices. No channel or receiver is simulated. Includes reciprocal training, R1/R2/R3, E, scrambled B1 and synchronous 16-QAM data. The chosen payload repeats plain ASCII bytes least-significant bit first, with no link-layer framing.",
     "sources": [
       {
-        "label": "V.32, §§4–5, Tables 1 and 5–7",
+        "label": "V.32, §§2, 4–5, Tables 1, 3 and 5–7",
         "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.32-198811-S%21%21PDF-E&lang=e&type=items"
       },
       {
@@ -186,7 +206,7 @@
       {
         "time": 3.1716666666666664,
         "title": "Return the training",
-        "text": "The caller now supplies its own known sequence. Each direction uses a different scrambler so the two signals can be distinguished."
+        "text": "The caller supplies its own known sequence. Each direction uses a different scrambler so the two signals can be distinguished."
       },
       {
         "time": 4.628333333333333,
@@ -194,7 +214,7 @@
         "text": "While the caller repeats its rate offer, the answerer trains again and selects 14,400. Both transmit an end word. The short data-mode preamble that follows is outside this excerpt."
       }
     ],
-    "method": "Synthesized V.25 answer tone, round-trip exchange, 2,400-baud training and scrambled rate words. Example uses 10 ms one-way propagation, chosen training lengths and a finite root-raised-cosine filter. Levels are normalized and no telephone channel is simulated. Ends at the E words, before trellis-coded B1 and user data.",
+    "method": "Synthesis begins at V.25 answer tone, after dialing and the initial off-hook silence. The caller answers after 1.02 s. V.25 permits early termination after detecting its response for 100 ms, so the 1.2 s tone is a permitted example. One-way delay is 10 ms. Training lengths and finite root-raised-cosine transmit filters are example choices. No channel or receiver is simulated. Ends at the E words, before trellis-coded B1 and user data.",
     "sources": [
       {
         "label": "V.32bis, §§4–6, Tables 2 and 4–6",
@@ -316,4 +336,128 @@
       {
         "time": 6.2073333333333345,
         "title": "Fine-tune both ends",
-        "text": "The answering modem marks the move to
+        "text": "The answering modem marks the move to final training. Both directions now train at once using separate scrambled sequences."
+      },
+      {
+        "time": 7.145333333333334,
+        "title": "Agree on a rate",
+        "text": "Both MP messages enable 33,600 and request it in both directions. Their acknowledgments and end markers conclude this excerpt."
+      }
+    ],
+    "method": "Synthesized V.8 menus, V.34 INFO messages with CRC, phase-reversal ranging, L1/L2, S, PP, four-point TRN, J, MP acknowledgments and E. This fixed clean-line scenario selects symmetric rates, zero frequency offset and no vendor-specific training. Pulse shaping, levels, receiver timing and training lengths are illustrative. Stops before the trellis-coded B1 preamble and payload. No recording or added noise.",
+    "sources": [
+      {
+        "label": "V.8 (1994), Tables 1–4 and call procedures",
+        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.8-199409-S%21%21PDF-E&lang=e&type=items"
+      },
+      {
+        "label": "V.34 (1996), §§5, 7, 10–11 and Tables 14–20",
+        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.34-199610-S%21%21PDF-E&lang=e&type=items"
+      }
+    ]
+  },
+  "56000": {
+    "stages": [
+      {
+        "time": 0,
+        "title": "Answer tone",
+        "text": "After a short silence the answering modem sends 2,100 Hz. Its strength ripples 15 times per second. Phase reversals ask network echo cancellers to stand aside."
+      },
+      {
+        "ti33334,
+        "title": "Measure the downlink",
+        "text": "The answering modem plays a 21-note chord for 160 ms, then the same chord 6 dB quieter. The four empty frequencies help reveal distortion."
+      },
+      {
+        "time": 3.0983333333333336,
+        "title": "Measure the return path",
+        "text": "The calling modem sends the same two-level probe. The two ends can now compare estimates for each direction."
+      },
+      {
+        "time": 3.6983333333333337,
+        "title": "Choose the symbol clock",
+        "text": "The example reports a clean path. INFO1 selects about 3,429 symbols per second and a carrier near 1,959 Hz for both ends."
+      },
+      {
+        "time": 4.07,
+        "title": "Align the receiver",
+        "text": "An alternating pair marks the start of training. Six turns through a known 48-symbol pattern give the receiver a reference. Scrambled ones follow it."
+      },
+      {
+        "time": 5.138666666666667,
+        "title": "Train the other direction",
+        "text": "The caller sends S, the periodic PP sequence and four-point training on the selected carrier. Both modems learn their own echo while the far receiver learns its equalizer."
+      },
+      {
+        "time": 6.2073333333333345,
+        "title": "Fine-tune both ends",
+        "text": "The answering modem marks the move to final training. Both directions now train at once using separate scrambled sequences."
+      },
+      {
+        "time": 7.145333333333334,
+        "title": "Agree on a rate",
+        "text": "Both MP messages enable 33,600 and request it in both directions. Their acknowledgments and end markers conclude this excerpt."
+      }
+    ],
+    "method": "Synthesized V.8 menus, V.34 INFO messages with CRC, phase-reversal ranging, L1/L2, S, PP, four-point TRN, J, MP acknowledgments and E. This fixed clean-line scenario selects symmetric rates, zero frequency offset and no vendor-specific training. Pulse shaping, levels, receiver timing and training lengths are illustrative. Stops before the trellis-coded B1 preamble and payload. No recording or added noise.",
+    "sources": [
+      {
+        "label": "V.8 (1994), Tables 1–4 and call procedures",
+        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.8-199409-S%21%21PDF-E&lang=e&type=items"
+      },
+      {
+        "label": "V.34 (1996), §§5, 7, 10–11 and Tables 14–20",
+        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.34-199610-S%21%21PDF-E&lang=e&type=items"
+      }
+    ]
+  },
+  "56000": {
+    "stages": [
+      {
+        "time": 0,
+        "title": "Answer tone",
+        "text": "After a short silence the answering modem sends 2,100 Hz. Its strength ripples 15 times per second. Phase reversals ask network echo cancellers to stand aside."
+      },
+      {
+        "time": 1.6,
+        "title": "The menus agree",
+        "text": "Listen to the low caller and higher reply. At 300 bit/s they advertise data service, V.34 fallback and complementary V.90 roles. Three framed zero bytes acknowledge the agreement."
+      },
+      {
+        "time": 2.575,
+        "title": "Both ends probe",
+        "text": "Each end sends the same 21 pitches, first loud and then 6 dB quieter. The far end compares what it receives. This edit moves directly between the two probe bursts."
+      },
+      {
+        "time": 3.695,
+        "title": "Train the receiver",
+        "text": "A 48 ms repeating pattern briefly reverses, then opens into a steady hiss. A digital scrambler determines every sign in that hiss. The receiver knows what to expect and can correct the line’s smearing."
+      },
+      {
+        "time": 5.549,
+        "title": "Test the PCM levels",
+        "text": "Which levels survive the route? This example alternates a known reference with test levels of increasing magnitude. The recurring swells are the same 64-level scan repeated six times."
+      },
+      {
+        "time": 8.429,
+        "title": "Carrier acquired",
+        "text": "After final negotiation, 48 frames of known bits lead straight into a repeated text message, “CARRIER IS UP. HELLO FROM THE DIGITAL END.” Six samples now carry 42 bits. The remote speaker would usually be silent by this point."
+      }
+    ],
+    "method": "Edited synthesis at native speed. V.8 menus, line probes, Sd/TRN1d, a chosen digital-impairment pattern, and B1d into 56,000 bit/s payload use documented signal rules. The timeline cuts out INFO/ranging, most upstream training and the final parameter exchange. The last two sections use example parameters, including an ideal 64-level magnitude set and no spectral shaping. PCM is decoded with North American μ-law. Listen levels are scaled for playback. No line distortion, telephone speaker, or recording is modeled.",
+    "sources": [
+      {
+        "label": "V.8 (1998), §§3–8 · answer tone and menu coding",
+        "url": "https://www.itu.int/rec/T-REC-V.8-199802-S"
+      },
+      {
+        "label": "V.34 (1998), §§7 and 10.1.2.4 · scrambler and probe phases",
+        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.34-199802-I%21%21PDF-E&lang=e&type=items"
+      },
+      {
+        "label": "V.90 (1998), §§5, 8 and 9 · PCM training and data mapping",
+        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.90-199809-I%21%21PDF-E&lang=e&type=items"
+      }
+    ]
+  }
+}
