@@ -1,0 +1,33 @@
+[
+  {
+    "file": "atari.webp",
+    "title": "Atari 800XL with Modem",
+    "credit": "Wolfgang Stief, 2019",
+    "source": "https://commons.wikimedia.org/wiki/File:Atari_800XL_with_Modem.jpg",
+    "original": "https://www.flickr.com/photos/stiefkind/48930224912/",
+    "license": "CC0 1.0 Universal",
+    "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "changes": "Resized and converted to WebP.",
+    "alt": "An orange telephone handset rests in the rubber cups of a Radio Shack modem beside an Atari 800XL and its cassette deck."
+  },
+  {
+    "file": "acoustic.webp",
+    "title": "Acoustic coupler",
+    "credit": "G. Edward Johnson, 2004",
+    "source": "https://commons.wikimedia.org/wiki/File:Acoustic_coupler_20041015_175456_1.jpg",
+    "license": "Public domain, author dedication",
+    "licenseURL": "https://commons.wikimedia.org/wiki/File:Acoustic_coupler_20041015_175456_1.jpg#Summary",
+    "changes": "Resized and converted to WebP.",
+    "alt": "A black CAT modem has two round rubber cups spaced to line up with the separate telephone handset behind it."
+  },
+  {
+    "file": "sendata.webp",
+    "title": "Acoustic Modem – Electromed, Sendata Series 700, circa 1975 (ST 43142)",
+    "credit": "© Museums Victoria",
+    "source": "https://collections.museumsvictoria.com.au/items/404180",
+    "license": "CC BY 4.0",
+    "licenseURL": "https://creativecommons.org/licenses/by/4.0/",
+    "changes": "Resized and converted to WebP.",
+    "alt": "Two rubber-lined sockets join at a flexible middle section. Straps extend from the ends to secure a handset against the sockets."
+  }
+]

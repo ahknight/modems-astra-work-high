@@ -1,0 +1,330 @@
+{
+  "origin": [
+    "Long before a home computer had anyone to call, Bell’s 101 and 103 data sets made machines audible to the telephone network. By 1962 the 103 could carry a conversation in both directions at once. The caller occupied one pair of pitches and the answering machine another. A receiver could listen in its partner’s band while its own transmitter kept talking.",
+    "An acoustic coupler made the handset itself the plug. You dialed, listened for the far end, then seated the receiver in its cups. A little loudspeaker played into the mouthpiece while a pickup listened at the earpiece. Livermore Data Systems sold both acoustic and direct-coupled models. Soon a hobbyist could build the part that spoke Bell’s language."
+  ],
+  "originSources": [
+    {
+      "label": "Computer History Museum archive · Bell 101 and 103 chronology, p. 11",
+      "url": "https://archive.computerhistory.org/resources/access/text/2022/08/102806104-05-01-acc.pdf#page=11"
+    },
+    {
+      "label": "AT&T · Data Set 103A, §§1.03–1.05 and Table A",
+      "url": "https://bitsavers.org/communications/westernElectric/modems/591-014-100_Data_Set_103A_Identification_and_Operation_Jan67.pdf#page=2"
+    },
+    {
+      "label": "Livermore Data Systems · 1974 equipment brochure",
+      "url": "https://s3data.computerhistory.org/brochures/livermore.70-series-modems.1974.102646309.pdf"
+    },
+    {
+      "label": "Felsenstein · acoustic coupling and the handset, pp. 43–44",
+      "url": "https://nnty.fun/downloads/books/TAEL/MAGAZINES/TECHNICAL/DIY/Popular%20Electronics/1976/Poptronics-1976-03.pdf"
+    }
+  ],
+  "300": {
+    "title": "Two voices on one wire",
+    "dek": "At Leopold’s Records in Berkeley, a customer could walk up to a keyboard and leave a message on a computer across the bay.",
+    "paragraphs": [
+      "Lee Felsenstein remembered the terminal at Leopold’s dialing San Francisco once a day and staying on the line. That first installation ran at 110 baud. His Pennywhistle design grew out of the Resource One project’s need for affordable terminal links in 1973. By March 1976, readers of <i>Popular Electronics</i> could build their own 300-bit/s modem for under $100. The prototype and the magazine kit account for two dates often attached to the same design.",
+      "The Pennywhistle’s receiver used the steady tone between characters as a reference. That let it follow a drifting signal, even from a cassette running a little off speed. Dennis Hayes and circuit designer Dale Heatherington took a different route into the home. By August 1977, <i>BYTE</i> was describing their 80-103A, an S-100 board whose host computer could dial or answer. An unattended computer could now pick up when somebody called.",
+      "Both ends had to agree on the tones. In the Bell 103A2 arrangement a caller sends a one at 1,270 Hz and a zero at 1,070 Hz. The answering station uses 2,225 and 2,025 Hz respectively. Each change of pitch can convey one bit. With one start bit, eight data bits and one stop bit, 300 bit/s buys 30 characters each second. Leave the keyboard alone and the idle mark can whistle continuously.",
+      "A second 300-bit/s family, CCITT V.21, used a different set of pitches. Owning a “300 baud” modem told you the speed. Knowing whether the far end spoke Bell 103 or V.21 told you whether the two could converse."
+    ],
+    "insight": {
+      "title": "A modem you could build",
+      "text": "“it turned out because it was self-adjusting, it could be made as a kit.” — Lee Felsenstein, interviewed by Kip Crosby for the Computer History Museum, 2008, p. 18. His circuit spared the builder a delicate receiver adjustment."
+    },
+    "sources": [
+      {
+        "label": "Lee Felsenstein · Computer History Museum oral history, pp. 12–18",
+        "url": "https://archive.computerhistory.org/resources/access/text/2012/10/102702231-05-01-acc.pdf#page=18"
+      },
+      {
+        "label": "Lee Felsenstein · Popular Electronics, March 1976, pp. 43–50",
+        "url": "https://nnty.fun/downloads/books/TAEL/MAGAZINES/TECHNICAL/DIY/Popular%20Electronics/1976/Poptronics-1976-03.pdf"
+      },
+      {
+        "label": "BYTE · 80-103A product notice, August 1977",
+        "url": "https://isaac.lsu.edu/byte/issues/197708_Byte_Magazine_Vol_02-08_Working_with_APL.pdf"
+      },
+      {
+        "label": "Dale Heatherington · founders, assembly and original flyer",
+        "url": "https://www.wa4dsy.net/heatherington/hayes/index.html"
+      },
+      {
+        "label": "Bell System Practices · 103A2 frequency assignments, Table A",
+        "url": "https://bitsavers.org/communications/westernElectric/modems/591-014-100_Data_Set_103A_Identification_and_Operation_Jan67.pdf#page=2"
+      },
+      {
+        "label": "CCITT · V.21, §§2–4, international 300-bit/s frequencies",
+        "url": "https://www.itu.int/rec/T-REC-V.21-198811-I"
+      }
+    ]
+  },
+  "1200": {
+    "title": "Read the turn of the wave",
+    "dek": "Four possible turns give the receiver two bits at every tick of its clock.",
+    "paragraphs": [
+      "At 300 bit/s a receiver asks which pitch it hears. The international CCITT V.22 design gives each direction its own carrier, nominally 1,200 Hz for the caller and 2,400 Hz for the answerer. Six hundred times a second, each receiver compares the new wave with the one just before it. The change in its position within a cycle is called a phase change.",
+      "Picture the wave as a hand going round a clock. At each symbol boundary the transmitter may leave that hand on course, move it a quarter turn forwards or backwards, or move it half a turn. The four choices stand for the four possible pairs of bits. Twice the symbol rate of the 300-bit/s link and twice the bits per symbol give 1,200 bit/s in each direction.",
+      "Startup gives the receiver familiar material before it has to read a stranger’s message. In the V.22 constant-carrier sequence, the answerer first sends a repeating, unscrambled stream of ones. The caller replies with ones passed through a scrambler, and the answerer switches to the same kind of signal. A scrambler reversibly stirs the bits into a changing pattern so even a steady input exercises the receiver’s timing.",
+      "The international design and Bell’s 212A are distinct 1,200-bit/s systems. For example, the Bell setup uses a 2,225 Hz answering tone. V.22 also allowed an optional 600-bit/s mode for one bit per symbol and national choices of guard tone. The ITU catalogue lists V.22 editions in 1979 and 1980. The detailed signal description here follows its 1988 revision."
+    ],
+    "insight": {
+      "title": "Baud counts decisions",
+      "text": "If the receiver decides between four alternatives 600 times a second, it receives 1,200 bits/s at 600 baud. Carrier frequency tells you how fast the underlying wave cycles. Symbol rate tells you how often it can say something new."
+    },
+    "sources": [
+      {
+        "label": "CCITT · V.22 §§1–2, 5 and 6.3.1, line signals and startup",
+        "url": "https://www.itu.int/rec/T-REC-V.22-198811-I"
+      },
+      {
+        "label": "ITU · V.22 edition history",
+        "url": "https://www.itu.int/ITU-T/recommendations/rec.aspx?lang=en&rec=8409"
+      },
+      {
+        "label": "CML Microcircuits · Bell 212A, Figure 1, high-speed connection",
+        "url": "https://cmlmicro.com/Content/Product%20Downloads/Wireline%20Telecom/AN_Telecom_869A_1_May06.pdf"
+      }
+    ]
+  },
+  "2400": {
+    "title": "Sixteen places to land",
+    "dek": "The line keeps the same beat. The receiver learns to distinguish four times as many symbols.",
+    "paragraphs": [
+      "Imagine keeping time to the same 600 ticks per second. V.22 gave a wave four possible turns. Its 1984 successor, CCITT V.22bis, also varies the wave’s size. Two bits select a change of quadrant relative to the last one. Two more select one of four positions within the new quadrant. Each symbol now carries four bits, giving a nominal 2,400 bit/s in the same two frequency bands.",
+      "Engineers draw these positions as dots called a constellation. Moving outward means increasing the wave’s amplitude. Moving around the centre means changing its phase. Sixteen possible landing places give the receiver a finer distinction to make. Noise or distortion that would have left the old quadrant obvious can put a point closer to the wrong neighbour.",
+      "A V.22bis pair begins in the 1,200-bit/s language both generations understand. The caller sends a short alternating pattern of the bit pairs 00 and 11. A compatible answerer sends it back. After training at 1,200 bit/s both switch to the denser signal and look for known bits before releasing user data. An older V.22 partner can complete a 1,200-bit/s call without answering that invitation.",
+      "The 1,200-bit/s fallback is built into the design. A separate optional procedure in the 1988 edition lets modems request a speed change during an established call, preserving the telephone connection. A noisy evening need not mean dialing the number all over again."
+    ],
+    "insight": {
+      "title": "One word in the standard",
+      "text": "Bis marks another version in this family of recommendations. V.22bis keeps enough of V.22 to strike up a conversation with an older machine. The short 00/11 exchange is where two newer machines recognize each other."
+    },
+    "sources": [
+      {
+        "label": "CCITT · V.22bis §§2.5, 6.3 and 6.6, Figures 2 and 5–7",
+        "url": "https://www.itu.int/rec/T-REC-V.22bis-198811-I/en"
+      },
+      {
+        "label": "ITU · V.22bis first edition, October 1984",
+        "url": "https://www.itu.int/ITU-T/recommendations/rec.aspx?lang=en&rec=6838"
+      }
+    ]
+  },
+  "9600": {
+    "title": "Hearing past the echo",
+    "dek": "Both modems finally get to use the same patch of the telephone line at the same time. Each has to learn the sound of its own voice coming back.",
+    "paragraphs": [
+      "At 2,400 bit/s, each direction had its own slice of the voice band. V.32 put both transmitters on the same nominal 1,800 Hz carrier and raised the pace from 600 to 2,400 symbols a second. Now the receiver could hear a loud copy of its own transmission mixed with the quieter reply. It knew what it had sent. During training it learned how the circuit delayed and distorted that signal, so it could subtract a prediction of the echo.",
+      "Listen for the two questions in the opening exchange. The caller holds one pitch. The answering modem returns a low and a high pitch together. Each can flip its wave halfway around and time the other modem’s response. The sharper, less musical training that follows gives the receivers a known pattern against which to adjust. An equalizer compensates for the way one symbol can smear into its neighbour.",
+      "The CCITT approved V.32 in 1984. Its 1988 edition specifies a 16-point mode for 9,600 interoperability and an optional 32-point trellis-coded alternative. Both deliver four information bits per symbol. In the coded version, the preceding choices restrict which point comes next. A receiver can weigh a whole succession of points when a single noisy one looks ambiguous. IBM researcher Gottfried Ungerboeck pioneered this combination of coding and modulation."
+    ],
+    "insight": {
+      "title": "Which 9,600?",
+      "text": "G. David Forney Jr. and the Codex team had already built high-speed modems for private lines. Their 9600C fed into V.29 for four-wire leased circuits. The milestone here is simultaneous two-way conversation over an ordinary dialled two-wire call. The ITU’s approval record dates V.32 to 1984, although some retrospective histories say 1986."
+    },
+    "sources": [
+      {
+        "label": "ITU approval record · V.32, October 1984",
+        "url": "https://www.itu.int/ITU-T/recommendations/rec.aspx?rec=6864"
+      },
+      {
+        "label": "CCITT · V.32 (1988), §§1–6 and startup diagram",
+        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.32-198811-S%21%21PDF-E&lang=e&type=items"
+      },
+      {
+        "label": "IEEE History Center · Gottfried Ungerboeck oral history",
+        "url": "https://ethw.org/Oral-History:Gottfried_Ungerboeck"
+      },
+      {
+        "label": "G. David Forney Jr., MIT · Telephone-line modem history, §1.3",
+        "url": "https://ocw.mit.edu/courses/6-451-principles-of-digital-communication-ii-spring-2005/28eebe8f610d548070dae1bf3f74b6cd_chap_1.pdf"
+      },
+      {
+        "label": "IEEE Spectrum · Forney and the Codex modem",
+        "url": "https://spectrum.ieee.org/david-forney-modem"
+      }
+    ]
+  },
+  "14400": {
+    "title": "More choices per beat",
+    "dek": "The clock stays put. A denser alphabet lets the same 2,400 decisions a second carry half as much information again.",
+    "paragraphs": [
+      "Compare two good connections. At 9,600 bit/s, every symbol carried four user bits. At 14,400 it carried six. The carrier still sat at 1,800 Hz, with each end cancelling its echo. The CCITT’s 1991 V.32bis recommendation used 128 possible amplitude-and-phase points at top speed. Six information bits plus a bit generated by the trellis encoder tell the transmitter which point to send. The extra bit gives the receiver clues across symbols. Lee-Fang Wei’s rotationally invariant trellis work underlies this family of modems.",
+      "The startup has a revealing change of texture. The receiver hears a regular pattern, a short reversal, then what sounds like a rough-edged hiss. Both ends can generate that last sequence from a rule. They can therefore tell how much of its roughness the telephone line added. Inside a real modem, the receiver uses it to tune its equalizer and the sender can use it to learn its own echo.",
+      "A V.32bis machine had to implement 4,800, 7,200, 9,600, 12,000 and 14,400 bit/s. The two ends negotiated a common rate and could renegotiate while connected without repeating all of training. Compatibility with V.32 at 4,800 and 9,600 preserved the older caller’s place on the bulletin board."
+    ],
+    "insight": {
+      "title": "Why text could download faster than a ZIP",
+      "text": "Optional layers changed file throughput. V.42’s LAPM checked frames and retried damaged ones. V.42bis, used over an error-controlled link, replaced recurring strings with dictionary codes and could switch to transparent transmission for incompressible data. The wire still carried the negotiated number of bits per second."
+    },
+    "sources": [
+      {
+        "label": "CCITT · V.32bis (1991), §§1–2, 4–6 and 8",
+        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.32bis-199102-I%21%21PDF-E&lang=e&type=items"
+      },
+      {
+        "label": "G. David Forney Jr., MIT · Wei codes in telephone modems, §1.3",
+        "url": "https://ocw.mit.edu/courses/6-451-principles-of-digital-communication-ii-spring-2005/28eebe8f610d548070dae1bf3f74b6cd_chap_1.pdf"
+      },
+      {
+        "label": "ITU · V.42 error control",
+        "url": "https://www.itu.int/rec/T-REC-V.42/en"
+      },
+      {
+        "label": "CCITT · V.42bis compression and transparent mode, §§1 and 7",
+        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.42bis-199001-I%21%21PDF-E&lang=e&type=items"
+      }
+    ]
+  },
+  "28800": {
+    "title": "Measuring the line",
+    "dek": "Call the same number twice and the best settings might differ. V.34 takes the circuit’s measure before committing to them.",
+    "paragraphs": [
+      "The CCITT’s earlier modems had a fixed symbol clock. In 1994 the ITU-T approved V.34, developed under the working name V.fast. It could change the clock, carrier and amount of high-frequency emphasis to suit the call. A better circuit could carry a broader signal. The required symbol rates were 2,400, 3,000 and 3,200 per second, with three additional choices optional.",
+      "After the V.8 exchange identifies a mutually supported modem mode, V.34 sends a short chord of 21 pitches. Four positions in its evenly spaced pattern are deliberately empty. The receiver knows what went out, so it can measure which notes arrived weak and whether distortion spilled energy into the empty slots. The first burst, L1, is 6 dB louder than the following L2. Later, the modems train their equalizers and echo cancellers, then exchange the settings for data.",
+      "Getting twice the previous top rate took more than a wider signal. V.34 grouped symbols when coding and shaping them. Shell mapping favoured groups needing less average transmit power, leaving more room between distinguishable choices for a given power budget. Motorola’s Vedat Eyuboglu helped develop the standard. The Motorola engineers’ contemporary account connects the mathematics to measurements on actual telephone circuits."
+    ],
+    "insight": {
+      "title": "One clock, nine bits on average",
+      "text": "A 28,800 bit/s call at 3,200 symbols/s delivers nine information bits per symbol on average. Other valid clock and data-rate combinations need fractional averages. V.34 spreads the bits across groups of symbols to achieve them."
+    },
+    "sources": [
+      {
+        "label": "ITU · Original V.34 approval under working name V.fast",
+        "url": "https://www.itu.int/ITU-T/recommendations/rec.aspx?rec=2756"
+      },
+      {
+        "label": "ITU-T · Original V.34 (1994), §§5, 9–11 and probing table",
+        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.34-199409-S%21%21PDF-E&lang=s&type=items"
+      },
+      {
+        "label": "Forney, Brown, Eyuboglu & Moran · The V.34 High-Speed Modem Standard, IEEE (1996)",
+        "url": "https://device.report/m/b20d3eea0a5c149a573acdb50c3b4edfe935928d7936b1db4b72565df5882e3d.pdf"
+      }
+    ]
+  },
+  "33600": {
+    "title": "The last few thousand bits",
+    "dek": "The familiar probing chord returns. This time the reply can authorize a much larger alphabet.",
+    "paragraphs": [
+      "The ITU-T’s October 1996 revision kept the name V.34. Study Group 14 reported the new ceiling at the Geneva standardization conference. At Motorola, Les Brown represented the company on modem standards committees and Jack Moran surveyed real telephone paths to build more representative tests. The distinction mattered. A design that worked over one pristine connection still had to recognize what a poor one would bear.",
+      "The revised recommendation added two optional rates, 31,200 and 33,600 bit/s. Top rate needs the fastest V.34 clock, about 3,429 symbols/s. At that clock, the standard offers 512 points with minimum shaping for 28,800, and 1,408 for 33,600. Expanded shaping allows 640 and 1,664 respectively. More possible points in the same power budget leave smaller margins for noise. Both ends need the option and a sufficiently clean path.",
+      "The probe itself barely gives the upgrade away. In final training the modems send an MP message containing their supported rates and limits for each direction. One capability bit advertises 33,600. A lower rate can win, and asymmetry is possible when both sides enable it. The old opening sound can thereflers, then exchange the settings for data.",
+      "Getting twice the previous top rate took more than a wider signal. V.34 grouped symbols when coding and shaping them. Shell mapping favoured groups needing less average transmit power, leaving more room between distinguishable choices for a given power budget. Motorola’s Vedat Eyuboglu helped develop the standard. The Motorola engineers’ contemporary account connects the mathematics to measurements on actual telephone circuits."
+    ],
+    "insight": {
+      "title": "One clock, nine bits on average",
+      "text": "A 28,800 bit/s call at 3,200 symbols/s delivers nine information bits per symbol on average. Other valid clock and data-rate combinations need fractional averages. V.34 spreads the bits across groups of symbols to achieve them."
+    },
+    "sources": [
+      {
+        "label": "ITU · Original V.34 approval under working name V.fast",
+        "url": "https://www.itu.int/ITU-T/recommendations/rec.aspx?rec=2756"
+      },
+      {
+        "label": "ITU-T · Original V.34 (1994), §§5, 9–11 and probing table",
+        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.34-199409-S%21%21PDF-E&lang=s&type=items"
+      },
+      {
+        "label": "Forney, Brown, Eyuboglu & Moran · The V.34 High-Speed Modem Standard, IEEE (1996)",
+        "url": "https://device.report/m/b20d3eea0a5c149a573acdb50c3b4edfe935928d7936b1db4b72565df5882e3d.pdf"
+      }
+    ]
+  },
+  "33600": {
+    "title": "The last few thousand bits",
+    "dek": "The familiar probing chord returns. This time the reply can authorize a much larger alphabet.",
+    "paragraphs": [
+      "The ITU-T’s October 1996 revision kept the name V.34. Study Group 14 reported the new ceiling at the Geneva standardization conference. At Motorola, Les Brown represented the company on modem standards committees and Jack Moran surveyed real telephone paths to build more representative tests. The distinction mattered. A design that worked over one pristine connection still had to recognize what a poor one would bear.",
+      "The revised recommendation added two optional rates, 31,200 and 33,600 bit/s. Top rate needs the fastest V.34 clock, about 3,429 symbols/s. At that clock, the standard offers 512 points with minimum shaping for 28,800, and 1,408 for 33,600. Expanded shaping allows 640 and 1,664 respectively. More possible points in the same power budget leave smaller margins for noise. Both ends need the option and a sufficiently clean path.",
+      "The probe itself barely gives the upgrade away. In final training the modems send an MP message containing their supported rates and limits for each direction. One capability bit advertises 33,600. A lower rate can win, and asymmetry is possible when both sides enable it. The old opening sound can therefore precede several different connect messages."
+    ],
+    "insight": {
+      "title": "What 56K would change",
+      "text": "V.34 was solving the problem of two analogue modems at the ends of a voice call. A provider connected digitally to the phone network could change one end of that problem. In December 1996, Forney and colleagues already reported that manufacturers were planning rates above 33.6 kb/s."
+    },
+    "sources": [
+      {
+        "label": "ITU-T · V.34 (1996), §§5 and 10, Tables 8, 10 and 20",
+        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.34-199610-S%21%21PDF-E&lang=e&type=items"
+      },
+      {
+        "label": "ITU · Geneva conference proceedings, report of Study Group 14, §4.1",
+        "url": "https://search.itu.int/history/HistoryDigitalCollectionDocLibrary/4.262.43.en.101.pdf"
+      },
+      {
+        "label": "Forney, Brown, Eyuboglu & Moran · Engineering account and participant biographies, IEEE (1996)",
+        "url": "https://device.report/m/b20d3eea0a5c149a573acdb50c3b4edfe935928d7936b1db4b72565df5882e3d.pdf"
+      }
+    ]
+  },
+  "56000": {
+    "title": "The exchange becomes the transmitter",
+    "dek": "The wire into your house was still copper. The modem at the other end had found a way to use the telephone exchange as part of its transmitter.",
+    "paragraphs": [
+      "Imagine dialing a friend who bought the very same 56K modem. You could connect, but both of you plugged into analogue phone jacks. For the fast direction, one end needed digital access to the telephone network. An internet provider could buy that access and send the exchange the actual numbers that its voice decoder would turn into voltages.",
+      "The network accepted 8,000 pulse-code modulation (PCM) samples each second. Your modem learned which output levels it could distinguish after their journey down your line. The provider then chose among those levels to carry the download. At the V.90 ceiling this averaged seven information bits per sample. On upload, the exchange still had to measure an incoming analogue waveform and round it to a voice code. V.90 used V.34 signaling in that direction, up to 33,600 bit/s.",
+      "V.8 opened the call by exchanging capabilities, including the type of network access at each end. V.8 bis was optional. Next the modems probed the line and measured the return delay. Training compensated for echoes and smearing; the home modem could request particular PCM levels to discover what the network did to them. In the final phase the pair settled the settings, sent the last known training symbols, and switched to user data. Line noise, extra conversions and transmit-power limits could all lower the negotiated rate. U.S. Robotics warned North American customers that power limits could cap downloads near 53.3 kbit/s.",
+      "Buying a 56K modem in 1997 meant checking what your provider owned. U.S. Robotics sold x2, while Rockwell and Lucent backed the incompatible K56flex. Engineer Brent Townshend licensed his approach to U.S. Robotics. ITU-T Study Group 16 brought manufacturers to a common specification. Reports in February 1998 describe the agreement on V.90; the ITU records formal approval on September 25. Those dates mark different events.",
+      "V.92, approved in 2000, added PCM upload up to 48 kbit/s on suitable connections, quicker reconnection over a recognized path, and a way to hold a session while answering call waiting. V.44 was a separate compression agreement based on work by Hughes Network Systems. It could shorten a transfer when the bytes contained repeated patterns. It could not change the line rate."
+    ],
+    "insight": {
+      "title": "“the noise is no longer noise, it’s a predictable quantity.”",
+      "text": "Brent Townshend, speaking to Dag Spicer for the Computer History Museum in 2022 (p. 44). It mattered where the rounding took place. A digitally connected sender could choose the exchange’s code in advance."
+    },
+    "sources": [
+      {
+        "label": "ITU-T V.90 (1998), §§3, 5, 8–9 and Appendix I · signal details",
+        "url": "https://www.itu.int/rec/dologin_pub.asp?id=T-REC-V.90-199809-I%21%21PDF-E&lang=e&type=items"
+      },
+      {
+        "label": "ITU-T · V.90 approval record",
+        "url": "https://www.itu.int/ITU-T/recommendations/rec.aspx?rec=4493"
+      },
+      {
+        "label": "Computer History Museum · Brent Townshend oral history, pp. 44–49",
+        "url": "https://archive.computerhistory.org/resources/access/text/2022/11/102792696-05-01-acc.pdf#page=44"
+      },
+      {
+        "label": "Wired · contemporary report on the February agreement",
+        "url": "https://www.wired.com/1998/02/itu-oks-56k-modem-pact/"
+      },
+      {
+        "label": "U.S. Robotics · line requirements and power limits",
+        "url": "https://support.usr.com/support/5610b/5610b-ug/five.html"
+      },
+      {
+        "label": "ITU-T · V.92 approval record and rates",
+        "url": "https://www.itu.int/ITU-T/recommendations/rec.aspx?lang=en&rec=5246"
+      },
+      {
+        "label": "ITU-T · V.92 features and V.44 compression",
+        "url": "https://www.itu.int/ITU-T/news/voiceband.html"
+      }
+    ]
+  },
+  "epilogue": [
+    {
+      "title": "ISDN · A digital phone call",
+      "text": "While voiceband modems were still climbing the speed ladder, homes with Basic Rate ISDN could already dial a provider digitally. Two 64 kbit/s bearer channels carried voice or data, and a separate 16 kbit/s channel handled call signaling. You could keep one bearer for the telephone or combine both for a nominal 128 kbit/s before overhead. The familiar Point-to-Point Protocol (PPP) survived the change of line. Its Multilink extension let the far end reassemble a packet sent across two calls.",
+      "sources": [
+        {
+          "label": "Cisco · ISDN Basic Rate Interface",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/dial/configuration/guide/15_1s/dia_15_1s_book/dia_cfg_isdn_bri.pdf"
+        },
+        {
+          "label": "IETF · PPP over ISDN (1994)",
+          "url": "https://www.rfc-editor.org/rfc/rfc1618.html"
+        },
+        {
+          "label": "IETF · Multilink PPP (1996)",
+          "url": "https://www.rfc-editor.org/rfc/rfc1990.html"
+        }
+      ]
+    },
+    {
+      "title": "DSL · More room on the same pair",
+      "text": "The twisted pair into the house could carry frequencies that the switched voice service discarded. ADSL put a data transceiver at each end of that local pair, allowing voice and broadband to coexist. Discrete multitone modulation split the available spectrum into many narrow carriers. Training measured each one. Clean carriers took more bits; noisy ones took fewer. If interference changed, the mo
